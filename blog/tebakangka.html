@@ -29,9 +29,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script type="text/javascript">
 
+    var acak = 0;
+    var jawab = 0;
+</script>
 </head>
-<body>
+<body onload="start()">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-custom" role="navigation">
@@ -130,12 +134,17 @@
 
       <div class="row">
         <div class="col-lg-12">
-          <img class="img-responsive media-middle" src="../img/devplan.jpg" id="gallery">
-          <button type="submit" class="btn btn-default" onClick="prev()">Prev</button>
-             <button type="submit" class="btn btn-default" onClick="next()">Next</button>
+          <h2>Yuk Tebak Angka</h2>
+          <h3>Kalian cuman dikasih kesempatan untuk tebak sebanyak 5x</h3>
+          <input id="input" type="textbox" style="color:black;">
+          <p id="hasil">
+            <br>
 
 
-        </div>
+          </p>
+          <button type="submit" class="btn btn-default" onClick="tebak()">Prev</button>
+
+      </div>
             <!-- Blog Post Content Column -->
 
 
@@ -168,32 +177,39 @@
 
 <script type="text/javascript">
 
-var img = new Array("../img/devplan.jpg","../img/pic1.jpg","../img/intro-low-res.jpg");
+function start()
+{
 
-var currentImage=img[0];
-var currentIndex=0;
+    var acak = Math.ceil(Math.random()*10);
+    var jawab = 0;
 
-function next(){
-
-    currentIndex++;//setiap dijalankan +1
-    if (currentIndex==3){
-      alert("gambar terakhir");
-      currentIndex=2; // set buat jadi terakhir
-    }
-    //alert (img[currentIndex]);
-    document.getElementById("gallery").src = img[currentIndex];
 };
 
-function prev(){
 
-    currentIndex--;//setiap dijalankan -1
-    if (currentIndex==-1){
-      alert("gambar pertama");
-      currentIndex=0; // set buat jadi terakhir
+function tebak() {
+
+
+
+var guess = document.getElementById("input").value;//ambil value input
+if (jawab < 5){
+
+    if(guess == acak){
+    document.getElementById("hasil").innerHTML = "Selamat Tebakkan anda benar";
     }
-    //alert (img[currentIndex]);
-    document.getElementById("gallery").src = img[currentIndex];
+    else if (guess<acak){
+      document.getElementById("hasil").innerHTML = "Tebakkan lebih kecil" +jawab ;
+    jawab++;
+    }
+    else if (guess>acak){
+    document.getElementById("hasil").innerHTML = "Tebakkan lebih Besar <br/> Tebak :" +jawab;
+    jawab++;
+    }
+}else {
+  document.getElementById("hasil").innerHTML = "Ulanglagi";
+  jawab =0;
+}
 };
+
 
 </script>
 
